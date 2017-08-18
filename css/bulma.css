@@ -4989,8 +4989,10 @@ a.tag:hover {
 }
 
 .card-content {
-  padding: 1.5rem;
+  position: relative;
+  padding-top: 50px;
 }
+
 
 .card-footer {
   border-top: 1px solid #dbdbdb;
@@ -9555,5 +9557,21 @@ h1{
 
 .clickable {
   cursor: pointer;
+}
+hr.divider {
+  margin: 1.3rem 0;
+}
+.notification {
+  height: 64px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: -32px 20px 0 20px;
+  padding: 1.25rem 1.25rem 1.25rem 1.25rem;
+}
+.no-side-padding {
+  padding-left: 0;
+  padding-right: 0;
 }
 /*# sourceMappingURL=bulma.css.map */
