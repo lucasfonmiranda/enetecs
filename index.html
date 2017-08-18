@@ -15,7 +15,7 @@
   <div class="container">
     <nav class="navbar">
       <div class="navbar-brand">
-        <a class="navbar-item" href="http://bulma.io">
+        <a class="navbar-item" href="">
           <img src="http://www.solidareasy.com/wp-content/uploads/2017/08/SEO-google-1.png" width="112" height="28">
         </a>
 
@@ -49,7 +49,7 @@
   <section class="section">
     <div class="container">
       <div class="columns is-multiline">
-        <div class="column is-3" :class="{ 'is-offset-3': index % 2 == 0 }" v-for="(i, index) in 3">
+        <div class="column is-3" :class="{ 'is-offset-3': index % 2 == 0 }" v-for="(i, index) in 4">
           <div class="card box is-paddingless clickable" @click="modalActive = !modalActive">
             <div class="card-image">
               <figure class="image is-3by2">
@@ -68,11 +68,7 @@
               <hr class="navbar-divider">
               <div class="content">
                 <div class="level">
-                  <div class="level-left">
-                    <div class="level-item">
-                      Last chance!
-                    </div>
-                  </div>
+                <a class="button is-success">Dar Lance</a>
                   <div class="level-right">
                     <div class="level-item">
                       <b>$ 3.041,99</b>
@@ -87,12 +83,11 @@
       </div>
     </div>
   </section>
-  
   <div class="modal" :class="{ 'is-active': modalActive}">
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Modal title</p>
+      <p class="modal-card-title">Modal title 1</p>
     </header>
     <section class="modal-card-body">
       <div class="card-image">
@@ -103,8 +98,8 @@
       <!-- Content ... -->
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-success">Save changes</button>
-      <button class="button" class="modal-close">Cancel</button>
+      <button class="button is-success">Dar Lance</button>
+      <button class="button" @click="modalActive = false" class="modal-close">Cancel</button>
     </footer>
   </div>
   <button @click="modalActive = false" class="modal-close is-large" aria-label="close"></button>
@@ -119,5 +114,6 @@
     modalActive: false,
    }
   });
+
 </script>
 </html>
