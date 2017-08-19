@@ -50,10 +50,10 @@
     <div class="container">
       <div class="columns is-multiline">
         <div class="column is-4-desktop is-5-tablet" :class="{ 'is-offset-2-desktop is-offset-1-tablet': index % 2 == 0 }" v-for="(item, index) in list">
-          <div class="card clickable" @click="openModal(item)">
+          <div class="card clickable">
             <div class="card-image">
               <figure class="image is-3by2">
-                <img src="http://bulma.io/images/placeholders/1280x960.png">
+                <img :src="item.image">
               </figure>
             </div>
             <div class="card-content">
@@ -146,7 +146,7 @@
 </div>
 </body>
 <script type="text/javascript">
-  const app = new Vue({
+const app = new Vue({
   el: "#app",
   data: {
     modalActive: false,
@@ -166,11 +166,21 @@
 });
 
 app.list = [
-{description: 'A master super advanced CD', value: 1999999.99},
-{description: 'A master super advanced Car', value: 13433.99},
-{description: 'A master super advanced City', value: 0.99},
-{description: 'A master super advanced Pen', value: 23.92},
+{
+  description: 'A master super advanced CD',
+  value: 1999999.99,
+  image: "https://s-media-cache-ak0.pinimg.com/originals/50/f4/d5/50f4d510a9c309d587c3108606ae8ac1.jpg"  
+},
+{
+  description: 'A master super advanced Car',
+  value: 13433.99,
+  image: "http://files1.porsche.com/filestore/image/multimedia/none/homepage-teaser-icc-718/normal/87592477-3037-11e7-9f74-0019999cd470;sQ/porsche-normal.jpg"
+},
+{
+  description: 'A master super advanced Pen', 
+  value: 0.99,
+  image: "http://www.montblanc.com/content/dam/mtb/products/writing-instruments/112/895/112895/197960-ecom-retina-01.png"
+},
 ];
-
 </script>
 </html>
