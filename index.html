@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
+    <title>Solidareasy</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
     <!--JAVASCRIPT-->
@@ -49,8 +49,8 @@
   <section class="section">
     <div class="container">
       <div class="columns is-multiline">
-        <div class="column is-4-desktop is-5-tablet" :class="{ 'is-offset-2-desktop is-offset-1-tablet': index % 2 == 0 }" v-for="(item, index) in 4">
-          <div class="card box is-paddingless clickable" @click="openModal(item)">
+        <div class="column is-4-desktop is-5-tablet" :class="{ 'is-offset-2-desktop is-offset-1-tablet': index % 2 == 0 }" v-for="(item, index) in list">
+          <div class="card clickable" @click="openModal(item)">
             <div class="card-image">
               <figure class="image is-3by2">
                 <img src="http://bulma.io/images/placeholders/1280x960.png">
@@ -101,7 +101,7 @@
               </div>
               <div class="media">
                 <div class="media-content">
-                  <small>Super master advanced collection item</small>
+                  <small>{{item.description}}</small>
                 </div>
                 <figure class="image is-48x48 media-right">
                   <img src="http://bulma.io/images/placeholders/96x96.png">
@@ -112,12 +112,12 @@
                 <div class="level is-mobile">
                   <div class="level-left">
                     <div class="level-item">
-                    <button class="button is-success">Dar Lance</button>
+                      <button class="button is-success">Dar Lance</button>
                     </div>
                   </div>
                   <div class="level-right">
                     <div class="level-item">
-                      <b>$ 3.041,99</b>
+                      <b>${{item.value}}</b>
                     </div>
                   </div>
                 </div>
@@ -130,11 +130,12 @@
     </div>
   </section>
   
-  <div class="modal" :class="{ 'is-active': modalActive}">
-  <div @click="closeModal" class="modal-background"></div>
+<div class="modal" :class="{ 'is-active': modalActive}">
+ <div @click="closeModal" class="modal-background"></div>
   <div class="modal-content">
     <div class="box">
-      {{selectedCard.id}}
+      <p>{{selectedCard.description}}</p>
+      <small v-text="selectedCard.value"/>
     </div>
   </div>
   <button @click="closeModal" class="modal-close is-large" aria-label="close"></button>
@@ -145,16 +146,17 @@
 </div>
 </body>
 <script type="text/javascript">
-  new Vue({
+  const app = new Vue({
   el: "#app",
   data: {
     modalActive: false,
     selectedCard: {},
+    list: null,
   },
   methods: {
     openModal(item) {
       this.modalActive = true;
-      this.selectedCard.id = item;
+      this.selectedCard = item;
     },
     closeModal() {
       this.modalActive = false;
@@ -162,6 +164,13 @@
     }
   }
 });
+
+app.list = [
+{description: 'A master super advanced CD', value: 1999999.99},
+{description: 'A master super advanced Car', value: 13433.99},
+{description: 'A master super advanced City', value: 0.99},
+{description: 'A master super advanced Pen', value: 23.92},
+];
 
 </script>
 </html>
