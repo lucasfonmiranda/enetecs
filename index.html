@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
     <!--JAVASCRIPT-->
-    <script src="js/counter.js"></script>
+    <script src="counter.js"></script>
     <script src="https://unpkg.com/vue"></script>
+<!--     <script src="main.js"></script> -->
   </head>
   
   <body>
@@ -15,7 +16,7 @@
   <div class="container">
     <nav class="navbar">
       <div class="navbar-brand">
-        <a class="navbar-item" href="">
+        <a class="navbar-item" href="./index.html">
           <img src="http://www.solidareasy.com/wp-content/uploads/2017/08/SEO-google-1.png" width="112" height="28">
         </a>
 
@@ -31,7 +32,7 @@
           <div class="navbar-item">
             <div class="field is-grouped">
               <p class="control">
-                <a class="button circular-radius" href="#">
+                <a class="button circular-radius" href="./login.html">
                   <span>Inscrever</span>
                 </a>
               </p>
@@ -63,36 +64,36 @@
                   <div class="column is-8 has-text-centered is-paddingless">     
                     <div class="columns is-mobile is-marginless" style="padding-top: 4px;">
                       <div class="column is-3 is-paddingless">
-                        <h5 class="title is-5">23</h5>
+                        <h5 class="title is-5" id="day"></h5>
                       </div>
                       <div class="column is-1 is-paddingless">
                         <h5 class="title is-5">:</h5>
                       </div>
                       <div class="column is-3 is-paddingless">
-                        <h5 class="title is-5">12</h5>
+                        <h5 class="title is-5" id="hour"></h5>
                       </div>
                       <div class="column is-1 is-paddingless">
                         <h5 class="title is-5">:</h5>
                       </div>
                       <div class="column is-3 is-paddingless">
-                        <h5 class="title is-5">59</h5>
+                        <h5 class="title is-5" id="minut"></h5>
                       </div>
                       <div class="column is-1 is-paddingless"></div>
                     </div>
                     <div class="columns is-mobile is-marginless">
                       <div class="column is-3 is-paddingless">
-                        <h5 class="subtitle is-6">DIA</h5>
+                        <h5 class="subtitle is-6">DIAS</h5>
                       </div>
                       <div class="column is-1 is-paddingless">
                         <h5 class="title is-5"></h5>
                       </div>
                       <div class="column is-3 is-paddingless">
-                        <h5 class="subtitle is-6">HOR.</h5>
+                        <h5 class="subtitle is-6">HOR</h5>
                       </div>
                       <div class="column is-1 is-paddingless">
                       </div>
                       <div class="column is-3 is-paddingless">
-                        <h5 class="subtitle is-6">MIN.</h5>
+                        <h5 class="subtitle is-6">MIN</h5>
                       </div>
                       <div class="column is-1 is-paddingless"></div>
                     </div>
@@ -103,8 +104,9 @@
                 <div class="media-content">
                   <small>{{item.description}}</small>
 
+
                 </div>
-                <figure class="image is-48x48 media-right">
+                <figure class="image is-64x64 media-right">
                   <img :src="item.logo">
                 </figure>
               </div>
@@ -113,6 +115,7 @@
                 <div class="level is-mobile">
                   <div class="level-left">
                     <div class="level-item">
+                    <p id="day"></p>
                       <button class="button is-primary">Dar Lance</button>
                     </div>
                   </div>
@@ -147,6 +150,7 @@
 </div>
 </body>
 <script type="text/javascript">
+
 const app = new Vue({
   el: "#app",
   data: {
@@ -195,5 +199,27 @@ app.list = [
 
 ];
 
+var countDownDate = new Date("Aug 29, 2017 15:37:25").getTime();
+
+var x = setInterval(function() {
+
+  var now = new Date().getTime();
+
+  var distance = countDownDate - now;
+
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("day").innerHTML = days;
+  document.getElementById("hour").innerHTML = hours;
+  document.getElementById('minut').innerHTML = minutes;
+  document.getElementById('sec').innerHTML = seconds; 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
 </script>
 </html>
