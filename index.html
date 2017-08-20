@@ -49,7 +49,7 @@
   <section class="section">
     <div class="container">
       <div class="columns is-multiline">
-        <div class="column is-4-desktop is-5-tablet" :class="{ 'is-offset-2-desktop is-offset-1-tablet': index % 2 == 0 }" v-for="(item, index) in list">
+        <div class="column is-4-desktop is-5-tablet" :class="{ 'is-2-desktop is-1-tablet': index % 2 == 0 }" v-for="(item, index) in list">
           <div class="card clickable">
             <div class="card-image">
               <figure class="image is-3by2">
@@ -102,9 +102,10 @@
               <div class="media">
                 <div class="media-content">
                   <small>{{item.description}}</small>
+
                 </div>
                 <figure class="image is-48x48 media-right">
-                  <img src="http://bulma.io/images/placeholders/96x96.png">
+                  <img :src="item.logo">
                 </figure>
               </div>
               <hr class="divider">
@@ -112,7 +113,7 @@
                 <div class="level is-mobile">
                   <div class="level-left">
                     <div class="level-item">
-                      <button class="button is-success">Dar Lance</button>
+                      <button class="button is-primary">Dar Lance</button>
                     </div>
                   </div>
                   <div class="level-right">
@@ -166,21 +167,33 @@ const app = new Vue({
 });
 
 app.list = [
+
 {
   description: 'A master super advanced CD',
   value: 1999999.99,
-  image: "https://s-media-cache-ak0.pinimg.com/originals/50/f4/d5/50f4d510a9c309d587c3108606ae8ac1.jpg"  
+  image: "https://s-media-cache-ak0.pinimg.com/originals/50/f4/d5/50f4d510a9c309d587c3108606ae8ac1.jpg" ,
+  logo: "http://www.infanciaacao.org/imagens/facebook.png" 
 },
 {
   description: 'A master super advanced Car',
   value: 13433.99,
-  image: "http://files1.porsche.com/filestore/image/multimedia/none/homepage-teaser-icc-718/normal/87592477-3037-11e7-9f74-0019999cd470;sQ/porsche-normal.jpg"
+  image: "http://files1.porsche.com/filestore/image/multimedia/none/homepage-teaser-icc-718/normal/87592477-3037-11e7-9f74-0019999cd470;sQ/porsche-normal.jpg",
+  logo: "https://polenfiles.blob.core.windows.net/ongs/ong-redeprofis-logo.png"
 },
 {
   description: 'A master super advanced Pen', 
   value: 0.99,
-  image: "http://www.montblanc.com/content/dam/mtb/products/writing-instruments/112/895/112895/197960-ecom-retina-01.png"
+  image: "http://www.montblanc.com/content/dam/mtb/products/writing-instruments/112/895/112895/197960-ecom-retina-01.png",
+  logo: "https://media.children.org/cdn-8d444fe9530d530/globalassets/05_about-us/media-kit-download/children-international-logo-purple-l.jpg"
 },
+{
+  description: 'A master super advanced Bike',
+  value: 345.00,
+  image: "https://i5.walmartimages.com/asr/56647e0c-980f-4ad6-af44-0edabb4ce4d5_1.bfaaf3b4f0b61e9e7a3fb26cd0cf581e.jpeg",
+  logo: "http://www.lbv.org/sites/all/themes/lbv/img/logo/lbv_1_Brasil_2.png"
+},
+
 ];
+
 </script>
 </html>
