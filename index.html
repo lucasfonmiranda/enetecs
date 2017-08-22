@@ -5,18 +5,18 @@
     <title>Solidareasy</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
+    <link rel="stylesheet" href="css/app.css">
     <!--JAVASCRIPT-->
-    <script src="counter.js"></script>
     <script src="https://unpkg.com/vue"></script>
-<!--     <script src="main.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js"></script>
   </head>
-  
+
   <body>
 <div id="app">
   <div class="container">
     <nav class="navbar">
       <div class="navbar-brand">
-        <a class="navbar-item" href="./index.html">
+        <a class="navbar-item" href="">
           <img src="http://www.solidareasy.com/wp-content/uploads/2017/08/SEO-google-1.png" width="112" height="28">
         </a>
 
@@ -37,7 +37,7 @@
                 </a>
               </p>
               <p class="control">
-                <a class="button circular-radius is-primary" href="#">
+                <a class="button circular-radius is-primary" href="./login.html">
                   <span>Entrar</span>
                 </a>
               </p>
@@ -50,7 +50,7 @@
   <section class="section">
     <div class="container">
       <div class="columns is-multiline">
-        <div class="column is-4-desktop is-5-tablet" :class="{ 'is-2-desktop is-1-tablet': index % 2 == 0 }" v-for="(item, index) in list">
+        <div class="column is-4-desktop is-5-tablet" :class="{ 'is-3-desktop is-1-tablet': index % 2 == 0 }" v-for="(item, index) in list">
           <div class="card clickable">
             <div class="card-image">
               <figure class="image is-3by2">
@@ -61,39 +61,39 @@
               <div class="notification is-primary">
                 <div class="columns is-mobile">
                   <div class="column is-4"><span>Running</span></div>
-                  <div class="column is-8 has-text-centered is-paddingless">     
+                  <div class="column is-8 has-text-centered is-paddingless">
                     <div class="columns is-mobile is-marginless" style="padding-top: 4px;">
                       <div class="column is-3 is-paddingless">
-                        <h5 class="title is-5" id="day"></h5>
+                        <h5 class="title is-5">{{ item.day == 0 ? item.hour : item.day}}</h5>
                       </div>
                       <div class="column is-1 is-paddingless">
                         <h5 class="title is-5">:</h5>
                       </div>
                       <div class="column is-3 is-paddingless">
-                        <h5 class="title is-5" id="hour"></h5>
+                        <h5 class="title is-5">{{item.day == 0 ? item.minute : item.hour}}</h5>
                       </div>
                       <div class="column is-1 is-paddingless">
                         <h5 class="title is-5">:</h5>
                       </div>
                       <div class="column is-3 is-paddingless">
-                        <h5 class="title is-5" id="minut"></h5>
+                        <h5 class="title is-5">{{item.day == 0 ? item.second : item.minute}}</h5>
                       </div>
                       <div class="column is-1 is-paddingless"></div>
                     </div>
                     <div class="columns is-mobile is-marginless">
                       <div class="column is-3 is-paddingless">
-                        <h5 class="subtitle is-6">DIAS</h5>
+                        <h5 class="subtitle is-6">{{ item.day == 0 ? 'HOR.' : 'DIA' }}</h5>
                       </div>
                       <div class="column is-1 is-paddingless">
                         <h5 class="title is-5"></h5>
                       </div>
                       <div class="column is-3 is-paddingless">
-                        <h5 class="subtitle is-6">HOR</h5>
+                        <h5 class="subtitle is-6">{{ item.day == 0 ? 'MIN.' : 'HOR.'}}</h5>
                       </div>
                       <div class="column is-1 is-paddingless">
                       </div>
                       <div class="column is-3 is-paddingless">
-                        <h5 class="subtitle is-6">MIN</h5>
+                        <h5 class="subtitle is-6">{{ item.day == 0 ? 'SEG.' : 'MIN.'}}</h5>
                       </div>
                       <div class="column is-1 is-paddingless"></div>
                     </div>
@@ -103,11 +103,9 @@
               <div class="media">
                 <div class="media-content">
                   <small>{{item.description}}</small>
-
-
                 </div>
-                <figure class="image is-64x64 media-right">
-                  <img :src="item.logo">
+                <figure class="image is-48x48 media-right">
+                <img :src="item.logo">
                 </figure>
               </div>
               <hr class="divider">
@@ -115,8 +113,7 @@
                 <div class="level is-mobile">
                   <div class="level-left">
                     <div class="level-item">
-                    <p id="day"></p>
-                      <button class="button is-primary">Dar Lance</button>
+                      <button class="button is-success">Dar Lance</button>
                     </div>
                   </div>
                   <div class="level-right">
@@ -133,93 +130,56 @@
       </div>
     </div>
   </section>
-  
-<div class="modal" :class="{ 'is-active': modalActive}">
- <div @click="closeModal" class="modal-background"></div>
-  <div class="modal-content">
-    <div class="box">
-      <p>{{selectedCard.description}}</p>
-      <small v-text="selectedCard.value"/>
-    </div>
-  </div>
-  <button @click="closeModal" class="modal-close is-large" aria-label="close"></button>
 </div>
-  
-</div>
-  
+
 </div>
 </body>
 <script type="text/javascript">
-
 const app = new Vue({
   el: "#app",
+  mounted() {
+
+    this.list = [
+    {
+      description: 'A master super advanced CD',
+      value: 1999999.99,
+      endDate: "22/08/2017 08:20:00",
+      image: "https://s-media-cache-ak0.pinimg.com/originals/50/f4/d5/50f4d510a9c309d587c3108606ae8ac1.jpg",
+      logo: "http://www.soubrasilia.com/brasilia/wp-content/uploads/2015/11/lbv.png"
+    },
+    {
+      description: 'A master super advanced Car',
+      value: 13433.99,
+      endDate: "23/08/2017 09:20:00",
+      image: "http://files1.porsche.com/filestore/image/multimedia/none/homepage-teaser-icc-718/normal/87592477-3037-11e7-9f74-0019999cd470;sQ/porsche-normal.jpg",
+      logo: "http://imagem.band.com.br/f_361957.jpg"
+    },
+    {
+      description: 'A master super advanced Pen',
+      value: 0.99,
+      endDate: "23/08/2017 09:20:00",
+      image: "http://www.montblanc.com/content/dam/mtb/products/writing-instruments/112/895/112895/197960-ecom-retina-01.png",
+      logo: "https://polenfiles.blob.core.windows.net/ongs/ong-brasiltomorrow-logo.png"
+    },
+    ];
+    this.updateTimeComponents();
+    setInterval(this.updateTimeComponents, 100);
+  },
   data: {
-    modalActive: false,
-    selectedCard: {},
-    list: null,
+    list: [],
   },
   methods: {
-    openModal(item) {
-      this.modalActive = true;
-      this.selectedCard = item;
-    },
-    closeModal() {
-      this.modalActive = false;
-      this.selectedCard = {};
+    updateTimeComponents() {
+      this.list.forEach(function(item) {
+        var duration = moment.duration(moment(item.endDate, "DD/MM/YYYY HH:mm:ss").diff(moment()));
+        Vue.set(item, 'day', duration.days());
+        Vue.set(item, 'hour', duration.hours());
+        Vue.set(item, 'minute', duration.minutes());
+        Vue.set(item, 'second', duration.seconds());
+      })
     }
   }
 });
 
-app.list = [
-
-{
-  description: 'A master super advanced CD',
-  value: 1999999.99,
-  image: "https://s-media-cache-ak0.pinimg.com/originals/50/f4/d5/50f4d510a9c309d587c3108606ae8ac1.jpg" ,
-  logo: "http://www.infanciaacao.org/imagens/facebook.png" 
-},
-{
-  description: 'A master super advanced Car',
-  value: 13433.99,
-  image: "http://files1.porsche.com/filestore/image/multimedia/none/homepage-teaser-icc-718/normal/87592477-3037-11e7-9f74-0019999cd470;sQ/porsche-normal.jpg",
-  logo: "https://polenfiles.blob.core.windows.net/ongs/ong-redeprofis-logo.png"
-},
-{
-  description: 'A master super advanced Pen', 
-  value: 0.99,
-  image: "http://www.montblanc.com/content/dam/mtb/products/writing-instruments/112/895/112895/197960-ecom-retina-01.png",
-  logo: "https://media.children.org/cdn-8d444fe9530d530/globalassets/05_about-us/media-kit-download/children-international-logo-purple-l.jpg"
-},
-{
-  description: 'A master super advanced Bike',
-  value: 345.00,
-  image: "https://i5.walmartimages.com/asr/56647e0c-980f-4ad6-af44-0edabb4ce4d5_1.bfaaf3b4f0b61e9e7a3fb26cd0cf581e.jpeg",
-  logo: "http://www.lbv.org/sites/all/themes/lbv/img/logo/lbv_1_Brasil_2.png"
-},
-
-];
-
-var countDownDate = new Date("Aug 29, 2017 15:37:25").getTime();
-
-var x = setInterval(function() {
-
-  var now = new Date().getTime();
-
-  var distance = countDownDate - now;
-
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  document.getElementById("day").innerHTML = days;
-  document.getElementById("hour").innerHTML = hours;
-  document.getElementById('minut').innerHTML = minutes;
-  document.getElementById('sec').innerHTML = seconds; 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "EXPIRED";
-  }
-}, 1000);
 </script>
 </html>

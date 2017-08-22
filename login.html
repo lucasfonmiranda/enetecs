@@ -1,0 +1,181 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Solidareasy</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <!--JAVASCRIPT-->
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vee-validate@2.0.0-rc.13"></script>
+    <script src="js/pt_BR.js"></script>
+  </head>
+
+<body>
+<div id="app">
+  <div class="container">
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="./index.html">
+          <img src="http://www.solidareasy.com/wp-content/uploads/2017/08/SEO-google-1.png" width="112" height="28">
+        </a>
+      </div>
+    </nav>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="columns is-multiline">
+        <div class="column is-6 is-offset-3">
+          <div class="box has-text-centered">
+            <center>
+                <figure class="image is-128x128">
+                  <img class="img-circle" src="http://www.solidareasy.com/wp-content/uploads/2017/08/profile-site-2.png">
+                </figure>
+            </center>
+            <p class="has-text-centered">Preencha seus dados e faça parte da comunidade SoliarEasy</p>
+            <!-- <div class="fb-login-button" data-width="200" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
+            <br>
+            <img width="200" src="https://scontent.fssa2-1.fna.fbcdn.net/v/t39.2365-6/17639236_1785253958471956_282550797298827264_n.png?oh=3f070b94fe0c2a2814582e91e950d6f8&oe=5A1358EA">
+            <br>
+            <br>
+            <div class="tabs is-fullwidth is-centered">
+              <ul>
+                <li @click="activeTab = 'cadastrar'" :class="{ 'is-active': activeTab == 'cadastrar' }"><a>CADASTRE-SE</a></li>
+                <li @click="activeTab = 'logar'" :class="{ 'is-active': activeTab == 'logar' }"><a>JÁ POSSUI CONTA?</a></li>
+              </ul>
+            </div>
+            <form @submit.prevent v-show="activeTab == 'logar'" class="columns" data-vv-scope="logar">
+              <div class="column is-8 is-offset-2">
+                <div class="field">
+                  <div class="control">
+                    <input v-model="login_email" v-validate="'required|email'" name="login_email" data-vv-as="Email" class="input" type="text" placeholder="Email">
+                  </div>
+                  <p class="help is-danger has-text-left" v-show="errors.has('logar.login_email')">{{ errors.first('logar.login_email') }}</p>
+                </div>
+                <div class="field">
+                  <div class="control">
+                    <input v-model="login_senha" v-validate="'required'" name="login_senha" data-vv-as="Senha" class="input" type="password" placeholder="Senha">
+                  </div>
+                  <p class="help is-danger has-text-left" v-show="errors.has('logar.login_senha')">{{ errors.first('logar.login_senha') }}</p>
+                </div>
+                <a @click="logar" class="button is-primary is-fullwidth">Continuar</a>
+                <br>
+                <a href="#">Esqueci minha senha</a><br>
+                <a href="#" @click="activeTab = 'cadastrar'">Não Possuo conta</a>
+              </div>
+            </form>
+            <form @submit.prevent v-show="activeTab == 'cadastrar'" class="columns is-multiline" data-vv-scope="cadastrar">
+              <div class="column is-8 is-offset-2">
+                <div class="field">
+                  <div class="control">
+                    <input v-model="cad_nome" v-validate="'required'" name="cad_nome" data-vv-as="Nome" class="input" type="text" placeholder="Nome">
+                  </div>
+                  <p class="help is-danger has-text-left" v-show="errors.has('cadastrar.cad_nome')">{{ errors.first('cadastrar.cad_nome') }}</p>
+                </div>
+                <div class="field">
+                  <div class="control">
+                    <input v-model="cad_sobrenome" v-validate="'required'" name="cad_sobrenome" data-vv-as="Sobrenome" class="input" type="text" placeholder="Sobrenome">
+                  </div>
+                  <p class="help is-danger has-text-left" v-show="errors.has('cadastrar.cad_sobrenome')">{{ errors.first('cadastrar.cad_sobrenome') }}</p>
+                </div>
+                <div class="field">
+                  <div class="control">
+                    <input v-model="cad_email" v-validate="'required|email'" name="cad_email" data-vv-as="Email" class="input" type="text" placeholder="Email">
+                  </div>
+                  <p class="help is-danger has-text-left" v-show="errors.has('cadastrar.cad_email')">{{ errors.first('cadastrar.cad_email') }}</p>
+                </div>
+                  <div class="field is-grouped">
+                    <div class="control is-expanded">
+                      <input v-model="cad_senha" v-validate="'required'" name="cad_senha" data-vv-as="Senha" class="input" type="password" placeholder="Senha">
+                      <p class="help is-danger has-text-left" v-show="errors.has('cadastrar.cad_senha')">{{ errors.first('cadastrar.cad_senha') }}</p>
+                    </div>
+                    <div class="control is-expanded">
+                      <input v-model="cad_confirmar" v-validate="'required|confirmed:cad_senha'" name="cad_confirmar" data-vv-as="Confirmar" class="input" type="text" placeholder="Confirmar">
+                      <p class="help is-danger has-text-left" v-show="errors.has('cadastrar.cad_confirmar')">{{ errors.first('cadastrar.cad_confirmar') }}</p>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="control">
+                      <label class="checkbox">
+                        <input type="checkbox" v-validate="'required'" name="condicoes" data-vv-as="Termos e condições">
+                        Eu aceito os <a href="#" target="_blank">termos e condições</a>
+                      </label>
+                    </div>
+                    <p class="help is-danger has-text-left" v-show="errors.has('cadastrar.condicoes')">{{ errors.first('cadastrar.condicoes') }}</p>
+                  </div>
+                  <a @click="cadastrar" class="button is-primary is-fullwidth">CONFIRMAR</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</div>
+</body>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.10&appId=1605854612998595";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript">
+Vue.use(VeeValidate, {
+  locale: 'pt_BR'
+});
+const app = new Vue({
+  el: "#app",
+  mounted() {
+  },
+  data: {
+    activeTab: 'logar', //or cadastrar
+    //login
+    login_email: null,
+    login_senha: null,
+    //create
+    cad_nome: null,
+    cad_sobrenome: null,
+    cad_email: null,
+    cad_senha: null,
+    cad_confirmar: null,
+  },
+  methods: {
+    logar() {
+      var self = this;
+      this.$validator.validateAll("logar").then(function(result) {
+        if (!result) {
+          return;
+        }
+        var login = self.login_email;
+        var senha = self.login_senha;
+        //do login
+        console.log("login");
+      });
+    },
+    cadastrar() {
+      var self = this;
+      this.$validator.validateAll("cadastrar").then(function(result) {
+        if (!result) {
+          return;
+        }
+        var nome = self.cad_nome;
+        var sobrenome = self.cad_sobrename;
+        var email = self.cad_email;
+        var senha = self.cad_senha;
+        var confirmar = self.cad_confirmar;
+        //do register
+        console.log("cadastrar")
+      });
+    }
+  }
+});
+
+</script>
+</html>
